@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.forgotpass.*
 class Passwordreset:AppCompatActivity(){
     private lateinit var auth:FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         auth= Firebase.auth
         super.onCreate(savedInstanceState)
         setContentView(R.layout.forgotpass)

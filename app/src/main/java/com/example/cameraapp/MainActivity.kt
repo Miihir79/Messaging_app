@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var color:Int=R.color.weak
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         auth= Firebase.auth
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,9 +70,11 @@ class MainActivity : AppCompatActivity() {
                             updateUI(null)
                         }
                     }
+
                 }
 
             }
+
         }
 
 

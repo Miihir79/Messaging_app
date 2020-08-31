@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.signin.*
 class SignInActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         auth=Firebase.auth
         setContentView(R.layout.signin)
@@ -54,8 +55,9 @@ class SignInActivity : AppCompatActivity(){
         {
             if(currentUser.isEmailVerified){
                 val intent=Intent(this,Homepage::class.java)
-                intent.putExtra("email",emailAdd);
+                intent.putExtra("email",emailAdd,);
                 startActivity(intent)
+
 
             }
             else{

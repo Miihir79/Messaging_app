@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Homepage">
-
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Google_signin"></activity>
+        <activity android:name=".signin_optios" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Homepage" />
+        <activity android:name=".Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,16 +25,14 @@
         </activity>
         <activity
             android:name=".SignInActivity"
-            android:label="Sign In">
-
-        </activity>
+            android:label="Sign In" />
         <activity
             android:name=".Passwordreset"
-            android:label="Password Reset Screen">
+            android:label="Password Reset Screen" />
 
-        </activity>
-
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
