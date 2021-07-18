@@ -1,5 +1,4 @@
 # Messaging_app
-<br>
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 <br>
 This is an advanced messaging app which has smart log in options smart password calculator. It has google maps support as well as camera support.
