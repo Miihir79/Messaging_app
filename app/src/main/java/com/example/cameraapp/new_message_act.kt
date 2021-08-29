@@ -13,6 +13,9 @@ import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.user_row_display.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class new_message_act : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,38 +24,38 @@ class new_message_act : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         imageButton_back.setOnClickListener {
-            val intent = Intent(this,Message::class.java)
-            startActivity(intent)
+            finish()
         }
 
-
-
         fetchuser()
-
-    }
-    companion object{
-        val USER_KEY="USER_KEY"
     }
 
-    private fun fetchuser(){
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
+
+    private fun fetchuser() {
+        CoroutineScope(Dispatchers.IO).launch {
+
         val ref = FirebaseDatabase.getInstance().getReference("/users")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<GroupieViewHolder>()
-                snapshot.children.forEach{
+                snapshot.children.forEach {
 
                     val user = it.getValue(Userdata::class.java)
-                    if(user != null){
+                    if (user != null) {
                         adapter.add(Useritem(user))
                     }
                 }
 
                 adapter.setOnItemClickListener { item, view ->
                     val useritem = item as Useritem
-                    val intent = Intent(view.context,Chatlog::class.java)
-                    intent.putExtra(USER_KEY,useritem.user)
+                    val intent = Intent(view.context, Chatlog::class.java)
+                    intent.putExtra(USER_KEY, useritem.user)
                     startActivity(intent)
                     finish()
                 }
@@ -60,6 +63,7 @@ class new_message_act : AppCompatActivity() {
             }
         })
 
+        }
     }
 }
 class Useritem(val user:Userdata): Item<GroupieViewHolder>(){
@@ -70,7 +74,6 @@ class Useritem(val user:Userdata): Item<GroupieViewHolder>(){
 
     override fun getLayout(): Int {
         return R.layout.user_row_display
-
 
     }
 

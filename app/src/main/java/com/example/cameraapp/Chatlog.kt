@@ -32,12 +32,12 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
     private var gLibrary : GestureLibrary? = null
     private  var tts : TextToSpeech? = null
     val adapter = GroupAdapter<GroupieViewHolder>()
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        gesturesetup()
+        //gesturesetup()
         tts = TextToSpeech(this,this)
         //val username = intent.getStringExtra(new_message_act.USER_KEY)
         val user = intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
@@ -50,8 +50,6 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         Recycler_chat.adapter = adapter
 
         imageButton_back2.setOnClickListener {
-            val intent = Intent(this,Message::class.java)
-            startActivity(intent)
             finish()
         }
 
@@ -161,13 +159,13 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         }
         super.onDestroy()
     }
-    private fun gesturesetup(){
+    /*private fun gesturesetup(){
         gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture)
         if(gLibrary?.load() == false){
 
         }
         gesture.addOnGesturePerformedListener(this)
-    }
+    }*/
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onGesturePerformed(p0: GestureOverlayView?, p1: Gesture?) {
@@ -197,8 +195,5 @@ class Chatitemfrom(val text: String): Item<GroupieViewHolder>(){
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.textView18.text = text
-
-
     }
-
 }

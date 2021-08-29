@@ -17,6 +17,9 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.messagesent.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -34,6 +37,7 @@ class Message : AppCompatActivity() {
             intent.putExtra(USER_KEY,row.chatpartid)
             startActivity(intent)
         }
+        //checking just to be sure that the user is signed in
         val uid = FirebaseAuth.getInstance().uid
         if(uid == null){
             val intent = Intent(this,signin_optios::class.java)
@@ -51,8 +55,6 @@ class Message : AppCompatActivity() {
         }
         Latestmess()
 
-
-
     }
     val latestmessmap = HashMap<String,chatMessage>()
 
@@ -62,22 +64,23 @@ class Message : AppCompatActivity() {
             adapter.add(LatestMessages(it))
         }
     }
-    private fun Latestmess(){
+    private fun Latestmess() {
+        CoroutineScope(Dispatchers.IO).launch {
+
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromId")
-        ref.addChildEventListener(object: ChildEventListener{
+        ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatmess = snapshot.getValue(chatMessage::class.java)?: return
+                val chatmess = snapshot.getValue(chatMessage::class.java) ?: return
                 latestmessmap[snapshot.key!!] = chatmess
-                textView_start_chatting.text=""
+                textView_start_chatting.text = ""
                 refrecyclermess()
                 //adapter.add(LatestMessages(chatmess))
-
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatmes = snapshot.getValue(chatMessage::class.java)?: return
-                textView_start_chatting.text=""
+                val chatmes = snapshot.getValue(chatMessage::class.java) ?: return
+                textView_start_chatting.text = ""
                 adapter.add(LatestMessages(chatmes))
 
             }
@@ -95,6 +98,8 @@ class Message : AppCompatActivity() {
             }
 
         })
+
+        }
     }
 
 }

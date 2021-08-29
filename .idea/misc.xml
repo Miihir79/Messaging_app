@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_chatlog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_homepage.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_new_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_signin_options.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/chat_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/forgotpass.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/messagesent.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

@@ -13,6 +13,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
@@ -25,12 +26,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.activity_homepage.*
-import java.util.jar.Manifest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListener {
-    private var gLibrary : GestureLibrary? = null
+    private lateinit var gLibrary : GestureLibrary
 
     companion object{
         private const val CAMERA_PERMISSION =1
@@ -41,40 +44,56 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
-        gesturesetup()
-        val intent= intent
-        var recivedemail=intent.getStringExtra("email")
-        val top_anim = AnimationUtils.loadAnimation(this,R.anim.top_anim)
-        val welcome= findViewById<TextView>(R.id.textView10)
+        //gesturesetup(// )
+        try {
+            gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture)
+        }catch (e:Exception){
+            Log.i("TAG", "onCreate: Did not reach here")
+            e.printStackTrace()
+        }
+        try{
+            gLibrary.load()
+        }catch (e:Exception){
+            Log.i("TAG", "onCreate: ${e.message} ${e.cause}")
+        }
+
+        gesture_home.addOnGesturePerformedListener(this)
+        val intentRecieved = intent
+        val recivedemail = intentRecieved.getStringExtra("email")
+        val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
+        val welcome = findViewById<TextView>(R.id.textView10)
         welcome.startAnimation(top_anim)
-        val name = findViewById<TextView>(R.id.textView9)
-        name.startAnimation(top_anim)
-        textView9.text=recivedemail
-        val id = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$id")
-         ref.addChildEventListener(object: ChildEventListener{
-             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                 val name = snapshot.getValue()
-                 textView9.text=name.toString()
-             }
+        val txtV_name = findViewById<TextView>(R.id.textView9)
+        txtV_name.startAnimation(top_anim)
+        textView9.text = recivedemail
+        CoroutineScope(Dispatchers.IO).launch {
 
-             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            val id = FirebaseAuth.getInstance().uid
+            val ref = FirebaseDatabase.getInstance().getReference("/users/$id")
+            ref.addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    val name = snapshot.value
+                    textView9.text = name.toString()
+                }
 
-             }
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
 
-             override fun onChildRemoved(snapshot: DataSnapshot) {
+                }
 
-             }
+                override fun onChildRemoved(snapshot: DataSnapshot) {
 
-             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                }
 
-             }
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
 
-             override fun onCancelled(error: DatabaseError) {
+                }
 
-             }
+                override fun onCancelled(error: DatabaseError) {
 
-         })
+                }
+
+            })
+        }
 
 
 
@@ -100,9 +119,6 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             val intent = Intent(this,Message::class.java)
             startActivity(intent)
         }
-
-
-
 
     }
 
@@ -163,11 +179,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
     }
 
     private fun gesturesetup(){
-        gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture)
-        if(gLibrary?.load() == false){
 
-        }
-        gesture_home.addOnGesturePerformedListener(this)
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onGesturePerformed(p0: GestureOverlayView?, p1: Gesture?) {
@@ -180,6 +192,5 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             }
         }
     }
-
 
 }
