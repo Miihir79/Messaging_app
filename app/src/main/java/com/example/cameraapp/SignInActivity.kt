@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.service.autofill.UserData
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,8 @@ import androidx.core.content.getSystemService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.signin.*
 
@@ -31,9 +34,10 @@ class SignInActivity : AppCompatActivity(){
                 auth.signInWithEmailAndPassword(editTextTextmail.text.toString(),editTextTextPass.text.toString()).addOnCompleteListener(this){
                     task->
                     if(task.isSuccessful){
-                        textView3.text="Signin sucessfull"
+                        textView3.text="Sign in successful"
                         val user = auth.currentUser
                         updateUI(user,editTextTextmail.text.toString())
+
                     }
                     else
                         textView3.text="Invalid Email or Password"
@@ -55,7 +59,7 @@ class SignInActivity : AppCompatActivity(){
         {
             if(currentUser.isEmailVerified){
                 val intent=Intent(this,Homepage::class.java)
-                intent.putExtra("email",emailAdd,);
+                intent.putExtra("email", emailAdd)
                 startActivity(intent)
 
 
@@ -74,3 +78,5 @@ class SignInActivity : AppCompatActivity(){
    //     updateUI(currentUser,currentUser?.email.toString())
   //  }
 }
+
+

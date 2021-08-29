@@ -7,4 +7,5 @@
     <color name="medium">#FFFF00</color>
     <color name="strong">#32CD32	</color>
     <color name="bullet">#228B21</color>
+    <color name="darkgrey">#3D3C40</color>
 </resources>

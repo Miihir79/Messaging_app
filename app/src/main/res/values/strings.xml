@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">camera app</string>
+    <string name="app_name">Test</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

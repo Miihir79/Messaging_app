@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -26,25 +27,27 @@ class Splashscreen : AppCompatActivity() {
 
         val welcome= findViewById<TextView>(R.id.Welcome)
         val message= findViewById<TextView>(R.id.message)
+        val android = findViewById<ImageView>(R.id.imageView4)
         welcome.startAnimation(top_anim)
         message.startAnimation(top_anim)
+        android.startAnimation(top_anim)
 
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
 
         // if user has signed in then directly to the main home page of the app otherwise to sign in methods
         Handler().postDelayed({
-            //if(user != null){
-               // val intent = Intent(this, Homepage::class.java)
-               // startActivity(intent)
-               // finish()
-           // }
-          //  else{
+            if(user != null){
+                val intent = Intent(this, Homepage::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else{
                 val intent = Intent(this,signin_optios::class.java)
                 startActivity(intent)
                 finish()
-          //  }
+            }
 
-        },1000)
+        },1500)
     }
 }
