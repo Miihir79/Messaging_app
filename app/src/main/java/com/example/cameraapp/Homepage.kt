@@ -25,7 +25,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-
+import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.activity_homepage.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,20 +44,8 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
-        //gesturesetup(// )
-        try {
-            gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture)
-        }catch (e:Exception){
-            Log.i("TAG", "onCreate: Did not reach here")
-            e.printStackTrace()
-        }
-        try{
-            gLibrary.load()
-        }catch (e:Exception){
-            Log.i("TAG", "onCreate: ${e.message} ${e.cause}")
-        }
+        gesturesetup()
 
-        gesture_home.addOnGesturePerformedListener(this)
         val intentRecieved = intent
         val recivedemail = intentRecieved.getStringExtra("email")
         val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
@@ -179,11 +167,23 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
     }
 
     private fun gesturesetup(){
+        try {
+            gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture_new)
+        }catch (e:Exception){
+            Log.i("TAG", "onCreate: Did not reach here")
+            e.printStackTrace()
+        }
+        try{
+            gLibrary.load()
+        }catch (e:Exception){
+            Log.i("TAG", "onCreate: ${e.message} ${e.cause}")
+        }
 
+        gesture_home.addOnGesturePerformedListener(this)
     }
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onGesturePerformed(p0: GestureOverlayView?, p1: Gesture?) {
-        val predictions = gLibrary?.recognize(p1)
+        val predictions = gLibrary.recognize(p1)
         predictions?.let {
             if(it.size > 0 && it[0].score > 1.0){
                 val intent = Intent(this,new_message_act::class.java)

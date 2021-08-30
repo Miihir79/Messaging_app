@@ -37,7 +37,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        //gesturesetup()
+        gesturesetup()
         tts = TextToSpeech(this,this)
         //val username = intent.getStringExtra(new_message_act.USER_KEY)
         val user = intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
@@ -159,13 +159,13 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         }
         super.onDestroy()
     }
-    /*private fun gesturesetup(){
-        gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture)
+    private fun gesturesetup(){
+        gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture_new)
         if(gLibrary?.load() == false){
-
+            Log.i("TAG", "gesturesetup: error in gesture loading")
         }
         gesture.addOnGesturePerformedListener(this)
-    }*/
+    }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onGesturePerformed(p0: GestureOverlayView?, p1: Gesture?) {
