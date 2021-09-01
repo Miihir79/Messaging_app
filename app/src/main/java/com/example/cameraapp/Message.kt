@@ -4,11 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
-import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cameraapp.new_message_act.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -20,8 +16,6 @@ import kotlinx.android.synthetic.main.messagesent.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class Message : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,30 +43,28 @@ class Message : AppCompatActivity() {
         }
 
         imageButton3.setOnClickListener {
-            val intent = Intent(this,Homepage::class.java)
-            startActivity(intent)
             finish()
         }
-        Latestmess()
+        latestMess()
 
     }
-    val latestmessmap = HashMap<String,chatMessage>()
+    val latestMessMap = HashMap<String,chatMessage>()
 
     private fun refrecyclermess(){
         adapter.clear()
-        latestmessmap.values.forEach{
+        latestMessMap.values.forEach{
             adapter.add(LatestMessages(it))
         }
     }
-    private fun Latestmess() {
+    private fun latestMess() {
         CoroutineScope(Dispatchers.IO).launch {
 
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromId")
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatmess = snapshot.getValue(chatMessage::class.java) ?: return
-                latestmessmap[snapshot.key!!] = chatmess
+                val chatMess = snapshot.getValue(chatMessage::class.java) ?: return
+                latestMessMap[snapshot.key!!] = chatMess
                 textView_start_chatting.text = ""
                 refrecyclermess()
                 //adapter.add(LatestMessages(chatmess))
@@ -104,7 +96,7 @@ class Message : AppCompatActivity() {
 
 }
 val adapter = GroupAdapter<GroupieViewHolder>()
-class LatestMessages(val chatMessage: chatMessage): Item<GroupieViewHolder>(){
+class LatestMessages(private val chatMessage: chatMessage): Item<GroupieViewHolder>(){
     var chatpartid : Userdata? = null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
@@ -114,13 +106,11 @@ class LatestMessages(val chatMessage: chatMessage): Item<GroupieViewHolder>(){
         //var time_mess=now_time-chatMessage.time
         //val date_time =LocalDateTime.now().toLocalTime()
         viewHolder.itemView.textView21.text= chatMessage.time.toString()
-        val chatpartener: String
-        if(chatMessage.fromid == FirebaseAuth.getInstance().uid){
-            chatpartener=chatMessage.toid
-        }
-        else
-            chatpartener = chatMessage.fromid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$chatpartener")
+        val chatPartner: String = if(chatMessage.fromid == FirebaseAuth.getInstance().uid){
+            chatMessage.toid
+        } else
+            chatMessage.fromid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartner")
         ref.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 chatpartid = snapshot.getValue(Userdata::class.java)

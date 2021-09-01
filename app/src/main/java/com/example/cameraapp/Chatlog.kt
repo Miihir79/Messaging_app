@@ -1,6 +1,5 @@
 package com.example.cameraapp
 
-import android.content.Intent
 import android.gesture.Gesture
 import android.gesture.GestureLibraries
 import android.gesture.GestureLibrary
@@ -21,75 +20,72 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.activity_chatlog.*
-import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.chat_row.view.*
 import kotlinx.android.synthetic.main.chat_row_2.view.*
-import java.time.LocalTime
 import java.util.*
-import kotlin.reflect.typeOf
 
 class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayView.OnGesturePerformedListener{
     private var gLibrary : GestureLibrary? = null
     private  var tts : TextToSpeech? = null
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private var integerList: MutableList<Int>? = null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
+
         gesturesetup()
         tts = TextToSpeech(this,this)
         //val username = intent.getStringExtra(new_message_act.USER_KEY)
         val user = intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
-
-        textView16.text = user?.username
+        integerList?.add(0)
+        txt_ChatLogTitle.text = user?.username
 
        // val adapter = GroupAdapter<GroupieViewHolder>()
        // adapter.add(Chatitemto("Hey what's poping"))
        // adapter.add(Chatitemfrom("Hey, nothhing much, same old crap, you say...."))
         Recycler_chat.adapter = adapter
 
-        imageButton_back2.setOnClickListener {
+        img_btnBack.setOnClickListener {
             finish()
         }
 
-
         if (user != null) {
-            loadmess(user)
+            loadMess(user)
         }
         send_button.setOnClickListener {
-                sendmessage()
-                message.text.clear()
+            sendMessage()
+            message.text.clear()
         }
 
-        imageButton2.setOnClickListener {
-            speakout(lastmess)
-
+        img_speaker.setOnClickListener {
+            speakOut(lastmess)
         }
 
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun speakout(text: String){
+    private fun speakOut(text: String){
         tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"")
     }
     var lastmess= ""
     var name = ""
 
-    private fun loadmess(userdata: Userdata){
+    private fun loadMess(userdata: Userdata){
         val ref = FirebaseDatabase.getInstance().getReference("/messages")
         ref.addChildEventListener(object :ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage=snapshot.getValue(chatMessage::class.java)
                 if(chatMessage!= null){
                     if(chatMessage.fromid == FirebaseAuth.getInstance().uid && chatMessage.toid == userdata.uid){
-                        adapter.add(Chatitemfrom(chatMessage.text))
+                        adapter.add(ChatItemFrom(chatMessage.text))
 
                     }
                     else if(chatMessage.toid == FirebaseAuth.getInstance().uid && chatMessage.fromid == userdata.uid){
                         lastmess=chatMessage.text
                         name = userdata.username
-                        adapter.add(Chatitemto(chatMessage.text))
+                        adapter.add(ChatItemTo(chatMessage.text))
                     }
 
                 }
@@ -116,25 +112,25 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun sendmessage(){
+    private fun sendMessage(){
         val text= message.text.toString()
-        val fromid = FirebaseAuth.getInstance().uid
+        val fromId = FirebaseAuth.getInstance().uid
         val user=intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
-        val toid = user?.uid
+        val toId = user?.uid
         val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
         //val time = LocalTime.now()
-        val chatmess = chatMessage(ref.key!!,text,fromid!!, toid!!,System.currentTimeMillis()/1000)
-        if(chatmess != null){
-            ref.setValue(chatmess).addOnSuccessListener {
+        val chatMess = chatMessage(ref.key!!,text,fromId!!, toId!!,System.currentTimeMillis()/1000)
+        if(chatMess != null){
+            ref.setValue(chatMess).addOnSuccessListener {
                 Log.d("abc","message sent")
             }
 
         }
-        val latestmessref = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromid/$toid")
-        latestmessref.setValue(chatmess)
+        val latestMessRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromId/$toId")
+        latestMessRef.setValue(chatMess)
 
-        val latestmesstoref = FirebaseDatabase.getInstance().getReference("/latest-mess/$toid/$fromid")
-        latestmesstoref.setValue(chatmess)
+        val latestMessToRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$toId/$fromId")
+        latestMessToRef.setValue(chatMess)
 
     }
 
@@ -173,12 +169,12 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         predictions?.let {
             if(it.size > 0 && it[0].score > 1.0){
                // Toast.makeText(applicationContext,"hmm",Toast.LENGTH_LONG).show()
-               speakout(lastmess)
+               speakOut(lastmess)
             }
         }
     }
 }
-class Chatitemto(val text : String): Item<GroupieViewHolder>(){
+class ChatItemTo(val text : String): Item<GroupieViewHolder>(){
     override fun getLayout(): Int {
         return R.layout.chat_row
     }
@@ -188,7 +184,7 @@ class Chatitemto(val text : String): Item<GroupieViewHolder>(){
     }
 
 }
-class Chatitemfrom(val text: String): Item<GroupieViewHolder>(){
+class ChatItemFrom(val text: String): Item<GroupieViewHolder>(){
     override fun getLayout(): Int {
         return R.layout.chat_row_2
     }

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +26,6 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.activity_homepage.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +44,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
-        gesturesetup()
+        gestureSetup()
 
         val intentRecieved = intent
         val recivedemail = intentRecieved.getStringExtra("email")
@@ -99,8 +99,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             }
         }
         signout.setOnClickListener {
-            alertdilouge()
-
+            alertDialog()
 
         }
         imageButton.setOnClickListener {
@@ -110,7 +109,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
 
     }
 
-    private fun alertdilouge(){
+    private fun alertDialog(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("SIGN OUT")
         builder.setMessage("Are you sure you want to sign out???")
@@ -161,12 +160,13 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         if(resultCode== Activity.RESULT_OK){
             if(requestCode== CAMERA){
                 val thumbnail: Bitmap = data!!.extras!!.get("data") as Bitmap
+                imageView.visibility = View.VISIBLE
                 imageView.setImageBitmap(thumbnail)
             }
         }
     }
 
-    private fun gesturesetup(){
+    private fun gestureSetup(){
         try {
             gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture_new)
         }catch (e:Exception){
@@ -186,7 +186,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         val predictions = gLibrary.recognize(p1)
         predictions?.let {
             if(it.size > 0 && it[0].score > 1.0){
-                val intent = Intent(this,new_message_act::class.java)
+                val intent = Intent(this@Homepage,new_message_act::class.java)
                 startActivity(intent)
 
             }
