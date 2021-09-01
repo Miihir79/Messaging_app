@@ -6,4 +6,7 @@ It has ***text to speech implementation even gesture controll options***.
 It has combined both gesture controll and text to speech in the chatlog wherein you can **listen to the last message recived by gesture**.
 
 ## Issues and contributions
+
+> Cannot format date time
+
 Check out the issues page and feel free to contribute.
