@@ -1,10 +1,14 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import com.example.cameraapp.*
+import com.example.cameraapp.R
+import com.example.cameraapp.data.Userdata
+import com.example.cameraapp.data.chatMessage
 import com.example.cameraapp.new_message_act.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -26,7 +30,7 @@ class Message : AppCompatActivity() {
 
         recycler_mess.adapter = adapter
         adapter.setOnItemClickListener { item, view ->
-            val intent = Intent(this,Chatlog::class.java)
+            val intent = Intent(this, Chatlog::class.java)
             val row = item as LatestMessages
             intent.putExtra(USER_KEY,row.chatpartid)
             startActivity(intent)
@@ -34,11 +38,11 @@ class Message : AppCompatActivity() {
         //checking just to be sure that the user is signed in
         val uid = FirebaseAuth.getInstance().uid
         if(uid == null){
-            val intent = Intent(this,signin_optios::class.java)
+            val intent = Intent(this, signin_optios::class.java)
             startActivity(intent)
         }
         new_message.setOnClickListener {
-            val intent = Intent(this,new_message_act::class.java)
+            val intent = Intent(this, new_message_act::class.java)
             startActivity(intent)
         }
 
@@ -48,7 +52,7 @@ class Message : AppCompatActivity() {
         latestMess()
 
     }
-    val latestMessMap = HashMap<String,chatMessage>()
+    val latestMessMap = HashMap<String, chatMessage>()
 
     private fun refrecyclermess(){
         adapter.clear()
@@ -127,7 +131,7 @@ class LatestMessages(private val chatMessage: chatMessage): Item<GroupieViewHold
     }
 
     override fun getLayout(): Int {
-        return  R.layout.messagesent
+        return R.layout.messagesent
     }
 
 }

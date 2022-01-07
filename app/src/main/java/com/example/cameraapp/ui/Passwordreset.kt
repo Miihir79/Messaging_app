@@ -1,10 +1,10 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cameraapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

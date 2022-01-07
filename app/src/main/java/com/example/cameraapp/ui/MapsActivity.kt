@@ -1,13 +1,15 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.widget.Toast
-import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.cameraapp.data.Locationlogin
+import com.example.cameraapp.R
 import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,10 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -109,7 +108,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         private fun startlocationupdate() {
 
-                fusedLocationClient.requestLocationUpdates(locationrequest, locationcallback, null)
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            fusedLocationClient.requestLocationUpdates(locationrequest, locationcallback, Looper.getMainLooper())
 
         }
 
@@ -118,6 +134,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             permissions: Array<String>,
             grantResults: IntArray
         ) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
             if (requestCode == LOCATION_PERMISION) {
                 if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
                         getLocation()

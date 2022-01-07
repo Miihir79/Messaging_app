@@ -3,6 +3,8 @@ package com.example.cameraapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cameraapp.data.Userdata
+import com.example.cameraapp.ui.Chatlog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -10,7 +12,6 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.user_row_display.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -66,7 +67,7 @@ class new_message_act : AppCompatActivity() {
         }
     }
 }
-class Useritem(val user:Userdata): Item<GroupieViewHolder>(){
+class Useritem(val user: Userdata): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.textView15.text=user.username
 

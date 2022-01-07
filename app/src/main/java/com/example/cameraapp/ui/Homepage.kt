@@ -1,4 +1,4 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,11 +16,12 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.cameraapp.R
+import com.example.cameraapp.new_message_act
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_homepage.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -49,10 +51,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         val intentRecieved = intent
         val recivedemail = intentRecieved.getStringExtra("email")
         val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
-        val welcome = findViewById<TextView>(R.id.textView10)
-        welcome.startAnimation(top_anim)
-        val txtV_name = findViewById<TextView>(R.id.textView9)
-        txtV_name.startAnimation(top_anim)
+        textView10.startAnimation(top_anim)
         textView9.text = recivedemail
         CoroutineScope(Dispatchers.IO).launch {
 
@@ -60,8 +59,12 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             val ref = FirebaseDatabase.getInstance().getReference("/users/$id")
             ref.addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                    val name = snapshot.value
-                    textView9.text = name.toString()
+
+                    MainScope().launch {
+                        val name = snapshot.value
+                        textView9.text = name.toString()
+                    }
+
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -86,7 +89,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
 
 
         button.setOnClickListener{
-            val intent = Intent(this,MapsActivity::class.java)
+            val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
         buttoncam.setOnClickListener {
@@ -95,7 +98,8 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
                 startActivityForResult(intent, CAMERA)
             }else{
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),
-                    CAMERA_PERMISSION)
+                    CAMERA_PERMISSION
+                )
             }
         }
         signout.setOnClickListener {
@@ -103,7 +107,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
 
         }
         imageButton.setOnClickListener {
-            val intent = Intent(this,Message::class.java)
+            val intent = Intent(this, Message::class.java)
             startActivity(intent)
         }
 
@@ -119,7 +123,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             Toast.makeText(applicationContext,"Signing out",Toast.LENGTH_LONG).show()
             dialougeInterface.dismiss()
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this,signin_optios::class.java)
+            val intent = Intent(this, signin_optios::class.java)
             startActivity(intent)
             finish()
 
@@ -168,7 +172,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
 
     private fun gestureSetup(){
         try {
-            gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture_new)
+            gLibrary = GestureLibraries.fromRawResource(this, R.raw.gesture_new)
         }catch (e:Exception){
             Log.i("TAG", "onCreate: Did not reach here")
             e.printStackTrace()
@@ -186,7 +190,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         val predictions = gLibrary.recognize(p1)
         predictions?.let {
             if(it.size > 0 && it[0].score > 1.0){
-                val intent = Intent(this@Homepage,new_message_act::class.java)
+                val intent = Intent(this@Homepage, new_message_act::class.java)
                 startActivity(intent)
 
             }

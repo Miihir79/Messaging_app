@@ -1,4 +1,4 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.gesture.Gesture
 import android.gesture.GestureLibraries
@@ -11,6 +11,10 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.cameraapp.R
+import com.example.cameraapp.data.Userdata
+import com.example.cameraapp.data.chatMessage
+import com.example.cameraapp.new_message_act
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -114,23 +118,25 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendMessage(){
         val text= message.text.toString()
-        val fromId = FirebaseAuth.getInstance().uid
-        val user=intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
-        val toId = user?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
-        //val time = LocalTime.now()
-        val chatMess = chatMessage(ref.key!!,text,fromId!!, toId!!,System.currentTimeMillis()/1000)
-        if(chatMess != null){
-            ref.setValue(chatMess).addOnSuccessListener {
-                Log.d("abc","message sent")
+        if(text.isNotBlank()){
+            val fromId = FirebaseAuth.getInstance().uid
+            val user=intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
+            val toId = user?.uid
+            val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+            //val time = LocalTime.now()
+            val chatMess = chatMessage(ref.key!!,text,fromId!!, toId!!,System.currentTimeMillis()/1000)
+            if(chatMess != null){
+                ref.setValue(chatMess).addOnSuccessListener {
+                    Log.d("abc","message sent")
+                }
+
             }
+            val latestMessRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromId/$toId")
+            latestMessRef.setValue(chatMess)
 
+            val latestMessToRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$toId/$fromId")
+            latestMessToRef.setValue(chatMess)
         }
-        val latestMessRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$fromId/$toId")
-        latestMessRef.setValue(chatMess)
-
-        val latestMessToRef = FirebaseDatabase.getInstance().getReference("/latest-mess/$toId/$fromId")
-        latestMessToRef.setValue(chatMess)
 
     }
 
@@ -156,7 +162,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         super.onDestroy()
     }
     private fun gesturesetup(){
-        gLibrary = GestureLibraries.fromRawResource(this,R.raw.gesture_new)
+        gLibrary = GestureLibraries.fromRawResource(this, R.raw.gesture_new)
         if(gLibrary?.load() == false){
             Log.i("TAG", "gesturesetup: error in gesture loading")
         }

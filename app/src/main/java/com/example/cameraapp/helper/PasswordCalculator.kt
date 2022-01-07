@@ -1,8 +1,9 @@
-package com.example.cameraapp
+package com.example.cameraapp.helper
 
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.MutableLiveData
+import com.example.cameraapp.R
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -32,19 +33,19 @@ class PasswordCalculator:TextWatcher{
     }
     private fun calculateStrength(password:CharSequence){
         if(password.length in 0..7){
-            strengthColor.value=R.color.weak
+            strengthColor.value= R.color.weak
             strengthlevel.value="WEAK"
         }
         else if(password.length in 8..10 && (lowercase.value==1 || uppercase.value==1 || digit.value==1 || special.value==1)){
-            strengthColor.value=R.color.medium
+            strengthColor.value= R.color.medium
             strengthlevel.value="MEDIUM"
         }
         else if(password.length in 11..16 &&(lowercase.value==1 || uppercase.value==1|| digit.value==1 || special.value==1)){
             strengthlevel.value="STRONG"
-            strengthColor.value=R.color.strong
+            strengthColor.value= R.color.strong
         }
         else if(password.length >16 && lowercase.value==1 || uppercase.value==1|| digit.value==1|| special.value==1){
-            strengthColor.value=R.color.bullet
+            strengthColor.value= R.color.bullet
             strengthlevel.value="BULLET PROOF"
         }
 

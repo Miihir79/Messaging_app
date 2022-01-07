@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Homepage">
+    tools:context=".ui.Homepage">
     <android.gesture.GestureOverlayView
         android:id="@+id/gesture_home"
         android:layout_width="match_parent"

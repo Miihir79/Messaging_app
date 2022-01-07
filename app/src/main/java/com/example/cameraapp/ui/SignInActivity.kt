@@ -1,19 +1,15 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.service.autofill.UserData
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.getSystemService
+import com.example.cameraapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.signin.*
 
@@ -45,12 +41,12 @@ class SignInActivity : AppCompatActivity(){
             }
         }
         textView4.setOnClickListener {
-        val intent= Intent(this,MainActivity::class.java)
+        val intent= Intent(this, MainActivity::class.java)
         startActivity(intent)
 
     }
         textViewforgot.setOnClickListener {
-            val intent = Intent(this,Passwordreset::class.java)
+            val intent = Intent(this, Passwordreset::class.java)
             startActivity(intent)
         }
     }
@@ -58,7 +54,7 @@ class SignInActivity : AppCompatActivity(){
         if(currentUser!=null)
         {
             if(currentUser.isEmailVerified){
-                val intent=Intent(this,Homepage::class.java)
+                val intent=Intent(this, Homepage::class.java)
                 intent.putExtra("email", emailAdd)
                 startActivity(intent)
 

@@ -1,16 +1,18 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.example.cameraapp.helper.PasswordCalculator
+import com.example.cameraapp.R
+import com.example.cameraapp.data.Userdata
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.editTextTextPass
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private var color:Int=R.color.weak
+    private var color:Int= R.color.weak
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
@@ -123,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
 
         textView2.setOnClickListener{
-            val intent = Intent(this,SignInActivity::class.java)
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -135,10 +137,10 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?){}
     private fun displaypasswordsugg(value:Int,text: TextView){
         if(value==1){
-            text.setTextColor(ContextCompat.getColor(this,R.color.bullet))
+            text.setTextColor(ContextCompat.getColor(this, R.color.bullet))
         }
         else{
-            text.setTextColor(ContextCompat.getColor(this,R.color.weak))
+            text.setTextColor(ContextCompat.getColor(this, R.color.weak))
         }
     }
     private fun displaystrengthlevel(strengthlevel:String){

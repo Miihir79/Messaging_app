@@ -1,14 +1,14 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.cameraapp.R
 import com.google.firebase.auth.FirebaseAuth
 
 class Splashscreen : AppCompatActivity() {
@@ -22,7 +22,7 @@ class Splashscreen : AppCompatActivity() {
         setContentView(R.layout.activity_splashscreen)
 
         //lines to add animation to the splash screen
-        val top_anim = AnimationUtils.loadAnimation(this,R.anim.top_anim)
+        val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
        // val bottom_anim = AnimationUtils.loadAnimation(this,R.anim.bottom_anim)
 
         val welcome= findViewById<TextView>(R.id.Welcome)
@@ -43,7 +43,7 @@ class Splashscreen : AppCompatActivity() {
                 finish()
             }
             else{
-                val intent = Intent(this,signin_optios::class.java)
+                val intent = Intent(this, signin_optios::class.java)
                 startActivity(intent)
                 finish()
             }

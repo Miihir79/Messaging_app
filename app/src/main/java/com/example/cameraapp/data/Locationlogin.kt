@@ -1,4 +1,4 @@
-package com.example.cameraapp
+package com.example.cameraapp.data
 
 import com.google.firebase.database.IgnoreExtraProperties
 
