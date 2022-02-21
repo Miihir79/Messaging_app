@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -51,8 +50,8 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         val intentRecieved = intent
         val recivedemail = intentRecieved.getStringExtra("email")
         val top_anim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
-        textView10.startAnimation(top_anim)
-        textView9.text = recivedemail
+        txt_wlkm.startAnimation(top_anim)
+        txt_name.text = recivedemail
         CoroutineScope(Dispatchers.IO).launch {
 
             val id = FirebaseAuth.getInstance().uid
@@ -62,7 +61,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
 
                     MainScope().launch {
                         val name = snapshot.value
-                        textView9.text = name.toString()
+                        txt_name.text = name.toString()
                     }
 
                 }
@@ -86,13 +85,11 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
             })
         }
 
-
-
-        button.setOnClickListener{
+        btn_map.setOnClickListener{
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
-        buttoncam.setOnClickListener {
+        btn_cam.setOnClickListener {
             if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED){
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMERA)
@@ -102,11 +99,14 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
                 )
             }
         }
-        signout.setOnClickListener {
+        btn_signout.setOnClickListener {
             alertDialog()
-
         }
-        imageButton.setOnClickListener {
+        btn_chats2.setOnClickListener {
+            val intent = Intent(this, Message::class.java)
+            startActivity(intent)
+        }
+        btn_chats.setOnClickListener {
             val intent = Intent(this, Message::class.java)
             startActivity(intent)
         }
@@ -164,8 +164,9 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         if(resultCode== Activity.RESULT_OK){
             if(requestCode== CAMERA){
                 val thumbnail: Bitmap = data!!.extras!!.get("data") as Bitmap
-                imageView.visibility = View.VISIBLE
-                imageView.setImageBitmap(thumbnail)
+                val intent = Intent(this,ImageView::class.java)
+                intent.putExtra("bitmap",thumbnail)
+                startActivity(intent)
             }
         }
     }

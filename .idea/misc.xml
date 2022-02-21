@@ -3,15 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/drawable-v24/ic_baseline_arrow_circle_down_24.xml" value="0.252" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/drawable/button.xml" value="0.252" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/drawable/chat.xml" value="0.252" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/drawable/ic_sprinkle.xml" value="0.252" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_chatlog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_homepage.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_image_view.xml" value="0.25" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_new_message.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_signin_options.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/activity_splashscreen.xml" value="0.25" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/chat_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/chat_row_2.xml" value="0.25" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/forgotpass.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/messagesent.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/signin.xml" value="0.25" />
+        <entry key="..\:/Users/Mihir Shah/AndroidStudioProjects/cameraapp/app/src/main/res/layout/user_row_display.xml" value="0.25" />
       </map>
     </option>
   </component>

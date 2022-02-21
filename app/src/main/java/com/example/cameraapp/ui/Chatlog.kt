@@ -29,10 +29,12 @@ import kotlinx.android.synthetic.main.chat_row_2.view.*
 import java.util.*
 
 class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayView.OnGesturePerformedListener{
+
     private var gLibrary : GestureLibrary? = null
     private  var tts : TextToSpeech? = null
     val adapter = GroupAdapter<GroupieViewHolder>()
     private var integerList: MutableList<Int>? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
@@ -77,10 +79,15 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
     var name = ""
 
     private fun loadMess(userdata: Userdata){
+
         val ref = FirebaseDatabase.getInstance().getReference("/messages")
+
         ref.addChildEventListener(object :ChildEventListener{
+
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
                 val chatMessage=snapshot.getValue(chatMessage::class.java)
+
                 if(chatMessage!= null){
                     if(chatMessage.fromid == FirebaseAuth.getInstance().uid && chatMessage.toid == userdata.uid){
                         adapter.add(ChatItemFrom(chatMessage.text))
@@ -95,7 +102,6 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
                 }
 
             }
-
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
             }
 
@@ -110,14 +116,12 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
 
         })
 
-
-
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendMessage(){
         val text= message.text.toString()
+
         if(text.isNotBlank()){
             val fromId = FirebaseAuth.getInstance().uid
             val user=intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
@@ -141,6 +145,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
     }
 
     override fun onInit(p0: Int) {
+
         if(p0 == TextToSpeech.SUCCESS){
             val result = tts?.setLanguage(Locale.US)
             if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
@@ -163,6 +168,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
     }
     private fun gesturesetup(){
         gLibrary = GestureLibraries.fromRawResource(this, R.raw.gesture_new)
+
         if(gLibrary?.load() == false){
             Log.i("TAG", "gesturesetup: error in gesture loading")
         }

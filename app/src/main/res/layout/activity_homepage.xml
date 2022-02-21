@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_sprinkle"
     tools:context=".ui.Homepage">
+
     <android.gesture.GestureOverlayView
         android:id="@+id/gesture_home"
         android:layout_width="match_parent"
@@ -22,8 +24,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/btn_chats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/chat"
+                android:fontFamily="@font/gilroy_semi_bold"
+                android:text="Open Chats"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <ImageButton
-                android:id="@+id/signout"
+                android:id="@+id/btn_signout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -34,7 +53,7 @@
                 app:srcCompat="@android:drawable/ic_menu_set_as" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_chats2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -44,89 +63,79 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_send" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                app:srcCompat="@drawable/ic_launcher_background"
-                tools:ignore="VectorDrawableCompat" />
-
             <Button
-                android:id="@+id/buttoncam"
+                android:id="@+id/btn_cam"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginEnd="80dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/chat"
+                android:fontFamily="@font/gilroy_semi_bold"
                 android:text="Open camera"
                 android:textColor="#FFFFFF"
-                android:textColorHighlight="#9C27B0"
-                android:textColorHint="#9C27B0"
-                android:textColorLink="#9C27B0"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_map"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginEnd="80dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/chat"
+                android:fontFamily="@font/gilroy_semi_bold"
                 android:text="Open map"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/buttoncam"
+                app:layout_constraintBottom_toTopOf="@+id/btn_cam"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/txt_wlkm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="35dp"
+                android:fontFamily="@font/gilroy_semi_bold"
                 android:text="Welcome!"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/signout" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_signout" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="53dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/gilroy_regular"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="@+id/txt_wlkm"
+                app:layout_constraintTop_toBottomOf="@+id/txt_wlkm" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/textView9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:maxWidth="200dp"
-                android:text="You can send messages, open maps and open camera for now! i require your feedback"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="152dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/gilroy_regular"
+                android:text="You can currently send messages, click and download images and open maps for now."
+                android:textColor="#373737"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView9"
+                app:layout_constraintBottom_toTopOf="@+id/btn_chats"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </android.gesture.GestureOverlayView>
