@@ -33,7 +33,14 @@ It has combined both gesture controll and text to speech in the chatlog wherein 
 
 Check out the issues page and feel free to contribute.
 
-
+## Package Structure
+    
+    com.example.cameraapp    # Root Package
+    .
+    ├── data                    # For data handling.
+    ├── ui                      # UI/View layer.
+    ├── helper                  # helper class has code for password calculator.
+      
 ## What do you need to get started?
 #### Latest version of android studio and basic android and googling skills will get you going.
 
