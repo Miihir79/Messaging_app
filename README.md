@@ -18,11 +18,10 @@ It has combined both gesture controll and text to speech in the chatlog wherein 
     <td><img src="https://user-images.githubusercontent.com/66465511/150848644-4571c8d7-26cb-4b88-97c3-b08f6947393f.jpg" width=250>
     <td><img src="https://user-images.githubusercontent.com/66465511/155102762-16aa842b-728b-4b6c-991f-438e66956f6f.jpg" width=250>
     <td><img src="https://user-images.githubusercontent.com/66465511/155102784-b87c3a3c-ffd0-4dd7-b316-664eb354420f.jpg" width=250>
-  <tr>
     <td><img src="https://user-images.githubusercontent.com/66465511/155100541-4c522366-3f55-4ccd-815d-ed3d615dd1c7.jpg" width=250>
+       <tr>
     <td><img src="https://user-images.githubusercontent.com/66465511/155101539-82f8d640-33e8-4106-81ca-19165d4e55d2.jpg" width=250>
     <td><img src="https://user-images.githubusercontent.com/66465511/155101557-554b795e-aa4d-4874-8bea-57ded9ab11aa.jpg" width=250>
-  <tr>
     <td><img src="https://user-images.githubusercontent.com/66465511/155101571-11a2363a-2f34-458b-9beb-d6012efa83df.jpg" width=250>
     <td><img src="https://user-images.githubusercontent.com/66465511/155101589-01967cbf-c84a-4e8b-be0c-162d3b70ae97.jpg" width=250>
 </table>
