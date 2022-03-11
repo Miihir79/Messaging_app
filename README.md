@@ -6,6 +6,8 @@
   [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 </p>
 
+![Google Pixel 4 XL Presentation (1)](https://user-images.githubusercontent.com/66465511/157849900-0f5d2beb-1643-4371-8927-69c49ef035f9.png)
+
 ### About
 
 This is an advanced messaging app which has smart log in options **smart password calculator**. It has google maps support as well as camera support.
