@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_sprinkle"
     tools:context=".ui.MainActivity">
 
     <Button
@@ -19,7 +20,7 @@
 
         android:fontFamily="@font/gilroy_semi_bold"
         android:text="signup"
-        android:textColor="#FFFFFF"
+        android:textColor="#FAFAFA"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.445"
@@ -31,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/edit_text_design"
         android:drawableStart="@drawable/custom_mail"
         android:drawablePadding="12dp"
         android:ems="10"
@@ -50,7 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/edit_text_design"
         android:drawableStart="@drawable/custom_lock"
         android:drawablePadding="12dp"
         android:ems="10"
@@ -95,7 +94,6 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/edit_text_design"
         android:drawableStart="@drawable/custom_lock"
         android:drawablePadding="12dp"
         android:ems="10"
@@ -159,7 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/edit_text_design"
         android:drawableStart="@drawable/custom_person"
         android:drawablePadding="12dp"
         android:ems="10"
