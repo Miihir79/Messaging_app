@@ -62,6 +62,5 @@ class ImageView : AppCompatActivity() {
         }catch (e:Exception){
             e.printStackTrace()
         }
-
     }
 }

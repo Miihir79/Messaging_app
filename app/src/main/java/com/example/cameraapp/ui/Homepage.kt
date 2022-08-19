@@ -186,7 +186,7 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         val predictions = gLibrary.recognize(p1)
         predictions?.let {
             if(it.size > 0 && it[0].score > 1.0){
-                val intent = Intent(this@Homepage, new_message_act::class.java)
+                val intent = Intent(this@Homepage, NewMessageActivity::class.java)
                 startActivity(intent)
 
             }

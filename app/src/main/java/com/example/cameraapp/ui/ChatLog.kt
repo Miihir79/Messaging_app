@@ -43,7 +43,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
         gesturesetup()
         tts = TextToSpeech(this,this)
         //val username = intent.getStringExtra(new_message_act.USER_KEY)
-        val user = intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
+        val user = intent.getParcelableExtra<Userdata>(NewMessageActivity.USER_KEY)
         integerList?.add(0)
         txt_ChatLogTitle.text = user?.username
 
@@ -123,7 +123,7 @@ class Chatlog : AppCompatActivity(), TextToSpeech.OnInitListener,GestureOverlayV
 
         if(text.isNotBlank()){
             val fromId = FirebaseAuth.getInstance().uid
-            val user=intent.getParcelableExtra<Userdata>(new_message_act.USER_KEY)
+            val user=intent.getParcelableExtra<Userdata>(NewMessageActivity.USER_KEY)
             val toId = user?.uid
             val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
             //val time = LocalTime.now()

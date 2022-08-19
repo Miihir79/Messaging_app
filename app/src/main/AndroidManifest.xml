@@ -29,7 +29,7 @@
             android:name=".ui.ImageView"
             android:exported="false" />
         <activity android:name=".ui.Chatlog" />
-        <activity android:name=".ui.new_message_act" />
+        <activity android:name=".ui.NewMessageActivity" />
         <activity android:name=".ui.Message" />
 
         <meta-data

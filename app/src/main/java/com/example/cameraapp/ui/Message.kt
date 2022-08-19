@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 import com.example.cameraapp.R
 import com.example.cameraapp.data.Userdata
 import com.example.cameraapp.data.chatMessage
-import com.example.cameraapp.ui.new_message_act.Companion.USER_KEY
+import com.example.cameraapp.ui.NewMessageActivity.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
@@ -41,7 +41,7 @@ class Message : AppCompatActivity() {
             startActivity(intent)
         }
         new_message.setOnClickListener {
-            val intent = Intent(this, new_message_act::class.java)
+            val intent = Intent(this, NewMessageActivity::class.java)
             startActivity(intent)
         }
 
