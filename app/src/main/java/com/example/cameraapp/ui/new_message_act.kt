@@ -1,10 +1,10 @@
-package com.example.cameraapp
+package com.example.cameraapp.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cameraapp.R
 import com.example.cameraapp.data.Userdata
-import com.example.cameraapp.ui.Chatlog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -27,7 +27,6 @@ class new_message_act : AppCompatActivity() {
         imageButton_back.setOnClickListener {
             finish()
         }
-
         fetchuser()
     }
 
@@ -70,12 +69,10 @@ class new_message_act : AppCompatActivity() {
 class Useritem(val user: Userdata): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.textView15.text=user.username
-
     }
 
     override fun getLayout(): Int {
         return R.layout.user_row_display
-
     }
 
 }

@@ -29,7 +29,7 @@
             android:name=".ui.ImageView"
             android:exported="false" />
         <activity android:name=".ui.Chatlog" />
-        <activity android:name=".new_message_act" />
+        <activity android:name=".ui.new_message_act" />
         <activity android:name=".ui.Message" />
 
         <meta-data
@@ -39,7 +39,7 @@
         <activity
             android:name=".ui.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ui.signin_optios" />
+        <activity android:name=".ui.SignInOptions" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.Homepage" />
         <activity

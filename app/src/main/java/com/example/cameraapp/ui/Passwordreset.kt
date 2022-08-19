@@ -21,7 +21,7 @@ class Passwordreset:AppCompatActivity(){
         buttonReset.setOnClickListener{
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken,0)
-            if(editTextTextReset.text.toString().isNullOrEmpty())
+            if(editTextTextReset.text.toString().isEmpty())
                 textView11.text="Email address not provided!"
             else{
                 auth.sendPasswordResetEmail(editTextTextReset.text.toString()).addOnCompleteListener(this){

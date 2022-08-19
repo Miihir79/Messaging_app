@@ -74,7 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         val uid= FirebaseAuth.getInstance().uid?:""
 
                         // var databaseRef: DatabaseReference = Firebase.database.reference
-                        val locationlogin = Locationlogin(location.latitude, location.longitude)
+                        val locationlogin = Locationlogin(location?.latitude, location?.longitude)
                         databaseRef.child(uid).setValue(locationlogin)
                             .addOnSuccessListener {
                                 Toast.makeText(

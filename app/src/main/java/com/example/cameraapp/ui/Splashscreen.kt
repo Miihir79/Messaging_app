@@ -43,7 +43,7 @@ class Splashscreen : AppCompatActivity() {
                 finish()
             }
             else{
-                val intent = Intent(this, signin_optios::class.java)
+                val intent = Intent(this, SignInOptions::class.java)
                 startActivity(intent)
                 finish()
             }

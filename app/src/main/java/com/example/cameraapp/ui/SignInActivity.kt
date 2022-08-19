@@ -24,7 +24,7 @@ class SignInActivity : AppCompatActivity(){
         SignIn.setOnClickListener {
             val inputMethodManager =  getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken,0)
-            if(editTextTextmail.text.toString().isNullOrEmpty() || editTextTextPass.text.toString().isNullOrEmpty())
+            if(editTextTextmail.text.toString().isEmpty() || editTextTextPass.text.toString().isEmpty())
                 textView3.text="Email or password not provided"
             else{
                 auth.signInWithEmailAndPassword(editTextTextmail.text.toString(),editTextTextPass.text.toString()).addOnCompleteListener(this){

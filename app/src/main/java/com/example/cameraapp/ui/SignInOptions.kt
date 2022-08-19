@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_signin_options.*
 
-class signin_optios : AppCompatActivity() {
+class SignInOptions : AppCompatActivity() {
     companion object{
         private const val RC_SIGN_IN =120
     }
@@ -94,8 +94,6 @@ class signin_optios : AppCompatActivity() {
                     Log.w("Signin activity", "signInWithCredential:failure", task.exception)
 
                 }
-
-
             }
     }
 }

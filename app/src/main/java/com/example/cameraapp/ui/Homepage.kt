@@ -20,7 +20,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.cameraapp.R
-import com.example.cameraapp.new_message_act
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -53,19 +52,15 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         txt_wlkm.startAnimation(top_anim)
         txt_name.text = recivedemail
         CoroutineScope(Dispatchers.IO).launch {
-
             val id = FirebaseAuth.getInstance().uid
             val ref = FirebaseDatabase.getInstance().getReference("/users/$id")
             ref.addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
                     MainScope().launch {
                         val name = snapshot.value
                         txt_name.text = name.toString()
                     }
-
                 }
-
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
 
                 }
@@ -119,20 +114,20 @@ class Homepage : AppCompatActivity(), GestureOverlayView.OnGesturePerformedListe
         builder.setMessage("Are you sure you want to sign out???")
         builder.setIcon(android.R.drawable.ic_lock_power_off)
 
-        builder.setPositiveButton("Yes"){ dialougeInterface,which->
+        builder.setPositiveButton("Yes"){ dialougeInterface, _ ->
             Toast.makeText(applicationContext,"Signing out",Toast.LENGTH_LONG).show()
             dialougeInterface.dismiss()
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, signin_optios::class.java)
+            val intent = Intent(this, SignInOptions::class.java)
             startActivity(intent)
             finish()
 
         }
-        builder.setNegativeButton("No"){dilouge,which->
+        builder.setNegativeButton("No"){ dilouge, _ ->
             Toast.makeText(applicationContext,"Good! you're not leaving",Toast.LENGTH_LONG).show()
             dilouge.dismiss()
         }
-        builder.setNeutralButton("Obviously not"){dilouge,which->
+        builder.setNeutralButton("Obviously not"){ dilouge, _ ->
             Toast.makeText(applicationContext,"Ha Ha Haa Knew it",Toast.LENGTH_LONG).show()
             dilouge.dismiss()
         }

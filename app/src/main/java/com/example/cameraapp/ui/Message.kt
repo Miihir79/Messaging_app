@@ -5,11 +5,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import com.example.cameraapp.*
 import com.example.cameraapp.R
 import com.example.cameraapp.data.Userdata
 import com.example.cameraapp.data.chatMessage
-import com.example.cameraapp.new_message_act.Companion.USER_KEY
+import com.example.cameraapp.ui.new_message_act.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
@@ -29,7 +28,7 @@ class Message : AppCompatActivity() {
         setContentView(R.layout.activity_message)
 
         recycler_mess.adapter = adapter
-        adapter.setOnItemClickListener { item, view ->
+        adapter.setOnItemClickListener { item, _ ->
             val intent = Intent(this, Chatlog::class.java)
             val row = item as LatestMessages
             intent.putExtra(USER_KEY,row.chatpartid)
@@ -38,7 +37,7 @@ class Message : AppCompatActivity() {
         //checking just to be sure that the user is signed in
         val uid = FirebaseAuth.getInstance().uid
         if(uid == null){
-            val intent = Intent(this, signin_optios::class.java)
+            val intent = Intent(this, SignInOptions::class.java)
             startActivity(intent)
         }
         new_message.setOnClickListener {
